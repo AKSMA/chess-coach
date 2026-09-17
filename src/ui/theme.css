@@ -1,0 +1,323 @@
+/**
+ * Design tokens.
+ *
+ * Everything visual in this app resolves to a value defined here. No component
+ * stylesheet may contain a raw hex colour, a raw pixel spacing, or a raw
+ * duration — if you need a new one, add it here first.
+ *
+ * The look is a dark "command deck": near-black indigo, glass panels lit from
+ * above, and a cyan-to-violet accent used sparingly so it still reads as
+ * emphasis. Light theme is fully supported and stays calm rather than trying
+ * to imitate the dark one.
+ *
+ * ORDER MATTERS in this file. The light palette is the plain `:root` base, the
+ * dark palette overrides it inside the media query, and the manual
+ * `[data-theme]` blocks come last because they must beat both. Putting the
+ * light block after the media query would silently disable dark mode entirely:
+ * same specificity, later wins.
+ */
+
+:root {
+  /* ---- Type ------------------------------------------------------------ */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Micro-labels: uppercase, widely tracked — the "instrument panel" voice. */
+  --tracking-label: 0.14em;
+  --tracking-tight: -0.02em;
+
+  /* ---- Spacing (4px base) --------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* ---- Radii ----------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --duration-fast: 140ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* ---- Accent (hue is shared; usage differs per theme) ------------------ */
+  --accent-cyan: #22d3ee;
+  --accent-violet: #a78bfa;
+  --accent-gradient: linear-gradient(120deg, var(--accent-cyan), var(--accent-violet));
+
+  /* ================= Light palette (the base) ========================== */
+  --bg: #eef1f8;
+  --bg-glow-1: rgba(34, 211, 238, 0.14);
+  --bg-glow-2: rgba(167, 139, 250, 0.14);
+  --bg-sunken: #e2e7f2;
+
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-raised: #ffffff;
+  --surface-solid: #ffffff;
+
+  --border: rgba(38, 58, 100, 0.14);
+  --border-strong: rgba(38, 58, 100, 0.28);
+  --edge-highlight: rgba(255, 255, 255, 0.9);
+
+  --text: #131a2c;
+  --text-muted: #4b566f;
+  --text-subtle: #77819a;
+  --text-inverse: #ffffff;
+
+  --accent: #0e7490;
+  --accent-hover: #0891b2;
+  --accent-soft: rgba(14, 116, 144, 0.1);
+  --accent-text: #ffffff;
+  --accent-glow: rgba(14, 116, 144, 0.25);
+
+  --board-light: #dfe6f2;
+  --board-dark: #7f93b5;
+  --board-edge: rgba(38, 58, 100, 0.2);
+  --board-lastmove: rgba(14, 165, 190, 0.32);
+  --board-check: rgba(214, 45, 70, 0.45);
+  --board-selected: rgba(124, 92, 255, 0.3);
+  --board-dest: rgba(30, 45, 80, 0.24);
+
+  --eval-white: #f4f7fd;
+  --eval-black: #2a3550;
+
+  --shadow-sm: 0 1px 2px rgba(20, 30, 60, 0.07);
+  --shadow-md: 0 4px 18px rgba(20, 30, 60, 0.1);
+  --shadow-lg: 0 16px 48px rgba(20, 30, 60, 0.16);
+
+  /*
+   * Verdict hues — three chromatic bands, not six.
+   *
+   * Six ordered hues cannot clear the CVD gates: the original inaccuracy and
+   * mistake steps were both dark oranges, ΔE 4.1 apart for *normal* vision.
+   * Folding to three bands (fine / warning / blunder) and letting the glyph
+   * carry the finer distinction passes every check in both modes, worst
+   * adjacent pair ΔE 16.3 CVD and 20.0 normal. Within the warning band the two
+   * steps differ by lightness only, which is an ordered step rather than a new
+   * hue. Validated with the dataviz palette validator.
+   */
+  --verdict-best: #0891b2;
+  --verdict-excellent: #0891b2;
+  --verdict-good: #0891b2;
+  --verdict-inaccuracy: #f59e0b;
+  --verdict-mistake: #d97706;
+  --verdict-blunder: #be123c;
+  --verdict-book: #64748b;
+  --verdict-forced: #64748b;
+
+  /* Chart roles. Single-hue sequential; charts here never need categorical. */
+  --chart-line: #0891b2;
+  --chart-fill: rgba(8, 145, 178, 0.14);
+  --chart-bar: #0891b2;
+  --chart-bar-muted: #94a3b8;
+  --chart-grid: rgba(38, 58, 100, 0.12);
+  --chart-surface: #ffffff;
+
+  color-scheme: light;
+}
+
+/* ================= Dark palette ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070912;
+    --bg-glow-1: rgba(34, 211, 238, 0.1);
+    --bg-glow-2: rgba(167, 139, 250, 0.12);
+    --bg-sunken: #05060d;
+
+    /* Panels are translucent so the background glow reads through them. */
+    --surface: rgba(20, 25, 43, 0.72);
+    --surface-raised: rgba(28, 34, 56, 0.92);
+    --surface-solid: #131829;
+
+    --border: rgba(140, 165, 220, 0.14);
+    --border-strong: rgba(140, 165, 220, 0.3);
+    --edge-highlight: rgba(190, 215, 255, 0.16);
+
+    --text: #e9eefb;
+    --text-muted: #a8b4d0;
+    --text-subtle: #7a86a4;
+    --text-inverse: #070912;
+
+    --accent: #22d3ee;
+    --accent-hover: #67e8f9;
+    --accent-soft: rgba(34, 211, 238, 0.14);
+    --accent-text: #04121a;
+    --accent-glow: rgba(34, 211, 238, 0.38);
+
+    --board-light: #8ea0bd;
+    --board-dark: #3c4a6b;
+    --board-edge: rgba(120, 180, 230, 0.22);
+    --board-lastmove: rgba(34, 211, 238, 0.3);
+    --board-check: rgba(246, 90, 111, 0.55);
+    --board-selected: rgba(167, 139, 250, 0.4);
+    --board-dest: rgba(200, 225, 255, 0.28);
+
+    --eval-white: #dfe8f7;
+    --eval-black: #101728;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.6);
+
+    /* Same three bands, stepped for the dark surface and re-validated there. */
+    --verdict-best: #0ea5b7;
+    --verdict-excellent: #0ea5b7;
+    --verdict-good: #0ea5b7;
+    --verdict-inaccuracy: #f0b429;
+    --verdict-mistake: #c98500;
+    --verdict-blunder: #e04057;
+    --verdict-book: #94a3b8;
+    --verdict-forced: #94a3b8;
+
+    --chart-line: #22d3ee;
+    --chart-fill: rgba(34, 211, 238, 0.16);
+    --chart-bar: #0ea5b7;
+    --chart-bar-muted: #4a5878;
+    --chart-grid: rgba(140, 165, 220, 0.14);
+    --chart-surface: #131829;
+
+    color-scheme: dark;
+  }
+}
+
+/* ================= Manual overrides — must win over both =============== */
+
+:root[data-theme='light'] {
+  --bg: #eef1f8;
+  --bg-sunken: #e2e7f2;
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-raised: #ffffff;
+  --surface-solid: #ffffff;
+  --border: rgba(38, 58, 100, 0.14);
+  --border-strong: rgba(38, 58, 100, 0.28);
+  --edge-highlight: rgba(255, 255, 255, 0.9);
+  --text: #131a2c;
+  --text-muted: #4b566f;
+  --text-subtle: #77819a;
+  --text-inverse: #ffffff;
+  --accent: #0e7490;
+  --accent-hover: #0891b2;
+  --accent-soft: rgba(14, 116, 144, 0.1);
+  --accent-text: #ffffff;
+  --accent-glow: rgba(14, 116, 144, 0.25);
+  --board-light: #dfe6f2;
+  --board-dark: #7f93b5;
+  --board-edge: rgba(38, 58, 100, 0.2);
+  --board-lastmove: rgba(14, 165, 190, 0.32);
+  --board-check: rgba(214, 45, 70, 0.45);
+  --board-selected: rgba(124, 92, 255, 0.3);
+  --board-dest: rgba(30, 45, 80, 0.24);
+  --eval-white: #f4f7fd;
+  --eval-black: #2a3550;
+  --shadow-sm: 0 1px 2px rgba(20, 30, 60, 0.07);
+  --shadow-md: 0 4px 18px rgba(20, 30, 60, 0.1);
+  --shadow-lg: 0 16px 48px rgba(20, 30, 60, 0.16);
+  --verdict-best: #0891b2;
+  --verdict-excellent: #0891b2;
+  --verdict-good: #0891b2;
+  --verdict-inaccuracy: #f59e0b;
+  --verdict-mistake: #d97706;
+  --verdict-blunder: #be123c;
+  --verdict-book: #64748b;
+  --verdict-forced: #64748b;
+  --chart-line: #0891b2;
+  --chart-fill: rgba(8, 145, 178, 0.14);
+  --chart-bar: #0891b2;
+  --chart-bar-muted: #94a3b8;
+  --chart-grid: rgba(38, 58, 100, 0.12);
+  --chart-surface: #ffffff;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #070912;
+  --bg-sunken: #05060d;
+  --surface: rgba(20, 25, 43, 0.72);
+  --surface-raised: rgba(28, 34, 56, 0.92);
+  --surface-solid: #131829;
+  --border: rgba(140, 165, 220, 0.14);
+  --border-strong: rgba(140, 165, 220, 0.3);
+  --edge-highlight: rgba(190, 215, 255, 0.16);
+  --text: #e9eefb;
+  --text-muted: #a8b4d0;
+  --text-subtle: #7a86a4;
+  --text-inverse: #070912;
+  --accent: #22d3ee;
+  --accent-hover: #67e8f9;
+  --accent-soft: rgba(34, 211, 238, 0.14);
+  --accent-text: #04121a;
+  --accent-glow: rgba(34, 211, 238, 0.38);
+  --board-light: #8ea0bd;
+  --board-dark: #3c4a6b;
+  --board-edge: rgba(120, 180, 230, 0.22);
+  --board-lastmove: rgba(34, 211, 238, 0.3);
+  --board-check: rgba(246, 90, 111, 0.55);
+  --board-selected: rgba(167, 139, 250, 0.4);
+  --board-dest: rgba(200, 225, 255, 0.28);
+  --eval-white: #dfe8f7;
+  --eval-black: #101728;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.6);
+  --verdict-best: #0ea5b7;
+  --verdict-excellent: #0ea5b7;
+  --verdict-good: #0ea5b7;
+  --verdict-inaccuracy: #f0b429;
+  --verdict-mistake: #c98500;
+  --verdict-blunder: #e04057;
+  --verdict-book: #94a3b8;
+  --verdict-forced: #94a3b8;
+  --chart-line: #22d3ee;
+  --chart-fill: rgba(34, 211, 238, 0.16);
+  --chart-bar: #0ea5b7;
+  --chart-bar-muted: #4a5878;
+  --chart-grid: rgba(140, 165, 220, 0.14);
+  --chart-surface: #131829;
+  color-scheme: dark;
+}
+
+/* Motion is decoration. If it isn't wanted, it doesn't happen. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
